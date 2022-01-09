@@ -1,0 +1,3 @@
+store the information in a void *
+create a function to copy the data into an img
+this function must be able to select a precision need ( superior and inferior )

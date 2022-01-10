@@ -6,7 +6,7 @@
 /*   By: pleveque <pleveque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:06:58 by pleveque          #+#    #+#             */
-/*   Updated: 2022/01/09 16:49:22 by pleveque         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:04:42 by pleveque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@ int	main(void)
 	void	*mlx_win;
 	t_data	img;
 	t_mif	mif;
+	t_coord	coord;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 400, 400, "Hello world!");
 	img.img = mlx_new_image(mlx, 1000, 1000);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								&img.endian);
-	mif_read("./files/test3.mif", &mif);
-	mif_to_img(&mif, &img, 10);
+	mif_read("./files/test.mif", &mif);
+	coord.x = 0;
+	coord.y = 0;
+	mif_to_img(&mif, &img, &img, 400, coord);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 	//afficher le container comme une image via minilibx
 }
 
-void	store_colors(t_list **colors, int fd)
+static void	store_colors(t_list **colors, int fd)
 {
 	t_color	*color;
 	char	*line;
